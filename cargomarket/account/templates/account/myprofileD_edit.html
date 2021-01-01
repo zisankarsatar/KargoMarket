@@ -1,0 +1,166 @@
+{% extends "base/base.html" %}
+{% load widget_tweaks %}
+{% block content %}
+
+<div class="container">
+    <div class="main-body">
+      <form method="POST" enctype="multipart/form-data">
+      {%csrf_token%}
+          <div class="row gutters-sm">
+            <div class="col-md-4 mb-3">
+              <div class="card">
+                <div class="card-body">
+                  <div class="d-flex flex-column align-items-center text-center">
+                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
+                    <div class="mt-3">
+                      {% render_field  u_form.username class="form-control input-transparent pl-3" %}
+                      <br>
+                      <button class="btn btn-outline-warning" type="submit" href="{% url 'myprofile' %}">Kaydet</button>
+                      <a class="btn btn-warning" href="{% url 'myprofile' %}" >İptal Et</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card mt-3">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                    <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe mr-2 icon-inline"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>Website</h6>
+                    <span class="text-secondary">{% render_field p_form.websiteUrl class="form-control input-transparent pl-1" %}</span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                    <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-facebook mr-2 icon-inline text-primary"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>Facebook</h6>
+                    <span class="text-secondary">{% render_field p_form.facebookUrl class="form-control input-transparent pl-1" %}</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <div class="card mb-3">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">İsim Soyisim</h6>
+                    </div>
+                    <div class="col-sm-4 text-secondary">
+                    {% render_field u_form.first_name class="form-control input-transparent pl-3" %}
+                    </div>
+                    <div class="col-sm-4.5 text-secondary">
+                    {% render_field u_form.last_name class="form-control input-transparent pl-3" %}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Email</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      {% render_field u_form.email class="form-control input-transparent pl-3" %}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Telefon</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      {% render_field p_form.phone_number class="form-control input-transparent pl-3" %}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Yaş</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                    {% render_field p_form.age class="form-control input-transparent pl-3" %}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Deneyim</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                    {% render_field p_form.experience class="form-control input-transparent pl-3" %}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Uyruk</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                    {% render_field p_form.nationality class="form-control input-transparent pl-3" %}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Cinsiyet</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                    {% render_field p_form.gender class="form-control input-transparent pl-3" %}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Sertifikalar</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      {% render_field p_form.licenses class="form-control input-transparent pl-3" %}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Ehliyet</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        {% render_field p_form.licenses class="form-control input-transparent pl-3"%}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Diller</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      {% render_field p_form.languages class="form-control input-transparent pl-3" %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row gutters-sm">
+            <div class="col-sm-12 mb-6">
+              <div class="card h-100">
+                <div class="card-body">
+                  <h4>Araç Bilgileri </h4>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Araç Model</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      {% render_field p_form.truck_model class="form-control input-transparent pl-3" %}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Kapasite</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      {% render_field p_form.max_capacity class="form-control input-transparent pl-3" %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+            </div>
+          </div>
+      </form>
+    </div>
+</div>
+{% endblock %}

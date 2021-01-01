@@ -1,0 +1,69 @@
+{% load static %}
+{% load widget_tweaks %}
+
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Login Page</title>
+    <link href="{% static 'account/css/application.min.css' %}" rel="stylesheet">
+    <link rel="shortcut icon" href="{% static 'account/img/truck-icon.png' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+</head>
+<body class="login-page">
+    <div class="container-fluid">
+        <main id="content" class="widget-login-container" role="main">
+        <div class="row align-item-center">
+            <div class="col-xl-3 offset-sm-1 offset-0 col-md-6 col-10 my-auto">
+                <section class="widget widget-login bg-transparent animated fadeInUp">
+                    <header>
+                        <h2>Giriş</h2>
+                    </header>
+                    <div class="widget-body">
+                        <p class="widget-login-info">
+                            <b>Kargo Market</b>'e  Hoşgeldiniz
+                        </p>
+                        <form class="login-form mt-lg" method="POST">
+                            {% csrf_token %}
+                            <div role="group" class="form-group">
+                                <label for="username" class="d-block">Kullanıcı Adı</label>
+                                <div>
+                                    <div role="group" class="input-group">
+                                        {% render_field form.username placeholder="Kullnıcı Adı" class="form-control input-transparent pl-3" %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div role="group" class="form-group">
+                                <label for="password" class="d-block">Şifre</label>
+                                <div>
+                                    <div role="group" class="input-group">
+                                        {% render_field form.password placeholder="Şifre" class="form-control input-transparent pl-3" %}
+                                    </div>
+                                </div>
+                            </div>
+                            <!--<div class="checkbox abc-checkbox mb-4 d-flex form-check">
+                                <a href="/">Şifreni mi unuttun?</a>
+                            </div>-->
+                            <div class="clearfix">
+                                <div class="btn-toolbar">
+                                    <button class="btn btn-warning btn-block" type="submit">Giriş Yap</button>
+                                </div>
+                            </div>
+                            <div class="group">
+                                <div class="widget-login-info">
+                                    <p class="widget-login-info text-center line"> Yada </p>
+                                     Hesabın yok mu?
+                                    <a class="mr-n-lg" href="{% url 'register' %}">Kayıt Ol</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+            </div>
+            <img src="{% static 'account/img/signin.svg' %}" class="singin" alt="signin">
+        </div>
+        </main>
+    </div>
+    <div class="loader-wrap hiding hide">
+        <i class="fa fa-circle-o-notch fa-spin-fast"></i>
+    </div>
+</body>
+</html>

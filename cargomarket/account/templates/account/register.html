@@ -1,0 +1,90 @@
+{% load static %}
+{% load widget_tweaks %}
+
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Kayıt Ol </title>
+    <link href="{% static 'account/css/application.min.css' %}" rel="stylesheet">
+    <link rel="shortcut icon" href="{% static 'account/img/truck-icon.png' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+</head>
+<body class="login-page">
+    <div class="container-fluid">
+        <main id="content" class="widget-login-container" role="main">
+        <div class="row align-item-center">
+            <div class="col-xl-3 offset-sm-1 offset-0 col-md-6 col-10 my-auto">
+                <section class="widget widget-login bg-transparent animated fadeInUp">
+                    <header>
+                        <h2>Kayıt Ol</h2>
+                    </header>
+                    <div class="widget-body">
+                        <p class="widget-login-info">
+                            <b>Kargo Market</b>'e  Hoşgeldiniz
+                        </p>
+                        <form class="login-form mt-lg" method="POST">
+                            {% csrf_token %}
+                            <div role="group" class="form-group">
+                                <label for="email" class="d-block">Kullanıcı Adı</label>
+                                <div>
+                                    <div role="group" class="input-group">
+                                        {% render_field form.username placeholder="Kullanıcı Adı" class="form-control input-transparent pl-3" %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div role="group" class="form-group">
+                                <label for="email" class="d-block">Email</label>
+                                <div>
+                                    <div role="group" class="input-group">
+                                        {% render_field form.email placeholder="Email" class="form-control input-transparent pl-3" %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div role="group" class="form-group">
+                                <label for="password" class="d-block">Şifre</label>
+                                <div>
+                                    <div role="group" class="input-group">
+                                        {% render_field form.password1 placeholder="Şifre" class="form-control input-transparent pl-3" %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div role="group" class="form-group">
+                                <label for="password" class="d-block">Şifre Tekrar</label>
+                                <div>
+                                    <div role="group" class="input-group">
+                                        {% render_field form.password2 placeholder="Şifre tekrar" class="form-control input-transparent pl-3" %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div role="group" class="form-group">
+                                <label for="profile_type">Kayıt Türü</label>
+                                <div>
+                                    <div role="group" class="radio-butto" style="display='flex'">
+                                        {% render_field form.profile_type type="radio" %}    
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix">
+                                <div class="btn-toolbar">
+                                    <button class="btn btn-warning btn-block" type="submit">Kayıt Ol</button>
+                                </div>
+                            </div>
+                            <div class="group">
+                                <div class="widget-login-info">
+                                    <p class="widget-login-info text-center line"> Yada </p>
+                                     Zaten hesabın var mı?
+                                    <a class="mr-n-lg" href="{% url 'login' %}">Giriş Yap</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+            </div>
+            <img src="{% static 'account/img/signup.svg' %}" class="singin" alt="signin">
+        </div>
+        </main>
+    </div>
+    <div class="loader-wrap hiding hide">
+        <i class="fa fa-circle-o-notch fa-spin-fast"></i>
+    </div>
+</body>
+</html>

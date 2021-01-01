@@ -1,0 +1,4 @@
+venv3/
+.vscode/
+*migrations*
+*db.sqlite3*

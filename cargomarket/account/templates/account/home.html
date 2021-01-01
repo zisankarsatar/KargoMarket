@@ -1,0 +1,69 @@
+{% extends "base/base.html" %}
+
+{% block title %}Anasayfa{% endblock %}
+{% block pagetitle %}Welcome{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">İlanlar</h1>
+        {% if request.user.companyprofile%}
+            <button type="button" class="btn btn-warning btn-circle btn-lg text-white"><i class="fa fa-plus"></i></button>
+        {% endif%}
+    </div>
+
+    <!-- Content Row -->
+    <div class="row" >
+        <div class="col-xl-4 col-lg-5">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">İlan 1 #</h6>
+                    <div class="dropdown no-arrow">
+                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                            <div class="dropdown-header">İlan 1 #</div>
+                            <a class="dropdown-item" href="#">İncele</a>
+                            <a class="dropdown-item" href="#">Teklif Ver</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Profil Görüntüle</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    İçerikkk
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4 col-lg-5">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">İlan 2 #</h6>
+                    <div class="dropdown no-arrow">
+                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                            <div class="dropdown-header">İlan 2 #</div>
+                            <a class="dropdown-item" href="#">İncele</a>
+                            <a class="dropdown-item" href="#">Teklif Ver</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Profil Görüntüle</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    İçerikkk
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
