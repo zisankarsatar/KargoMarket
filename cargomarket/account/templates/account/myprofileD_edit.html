@@ -108,7 +108,7 @@
                       <h6 class="mb-0">Sertifikalar</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      {% render_field p_form.licenses class="form-control input-transparent pl-3" %}
+                      {% render_field p_form.licenses %}
                     </div>
                   </div>
                   <hr>
@@ -117,7 +117,7 @@
                       <h6 class="mb-0">Ehliyet</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                        {% render_field p_form.licenses class="form-control input-transparent pl-3"%}
+                      {% render_field p_form.driving_licenses %}
                     </div>
                   </div>
                   <hr>
@@ -132,32 +132,32 @@
                 </div>
               </div>
               <div class="row gutters-sm">
-            <div class="col-sm-12 mb-6">
-              <div class="card h-100">
-                <div class="card-body">
-                  <h4>Araç Bilgileri </h4>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Araç Model</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                      {% render_field p_form.truck_model class="form-control input-transparent pl-3" %}
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Kapasite</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                      {% render_field p_form.max_capacity class="form-control input-transparent pl-3" %}
+                <div class="col-sm-12 mb-6">
+                  <div class="card h-100">
+                    <div class="card-body">
+                      <h4>Araç Bilgileri </h4>
+                      <hr>
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <h6 class="mb-0">Araç Model</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                          {% render_field p_form.truck_model class="form-control input-transparent pl-3" %}
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <h6 class="mb-0">Kapasite</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                          {% render_field p_form.max_capacity class="form-control input-transparent pl-3" %}
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
             </div>
           </div>
       </form>

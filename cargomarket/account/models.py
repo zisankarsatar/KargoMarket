@@ -17,10 +17,17 @@ class BaseProfile(models.Model):
 class License(models.Model):
     license_name = models.CharField('License Name', max_length=50)
     license_description = models.CharField('License Description', max_length=200)
+    
+    def __str__(self):
+        return '{} | {}'.format( self.license_name, self.license_description )
+
 
 class DrivingLicense(models.Model):
     driving_name = models.CharField('License Name', max_length=50)
     driving_description = models.CharField('License Description', max_length=200)
+
+    def __str__(self):
+        return '{} | {}'.format( self.driving_name, self.driving_description )
 
 
 class DriverProfile(BaseProfile):

@@ -1,6 +1,6 @@
 from django.contrib.auth.forms import UserCreationForm 
 from django.contrib.auth.models import User
-from account.models import CompanyProfile, DriverProfile
+from account.models import CompanyProfile, DriverProfile, License, DrivingLicense
 
 
 from django import forms
@@ -60,6 +60,8 @@ class DriverProfileUpdateForm(forms.ModelForm):
         #fields = ['age', 'phone_number', 'gender', 'nationality', 'experience','websiteUrl','facebookUrl','licenses','driving_licenses','languages']
         exclude = ['user']
 
+    licenses = forms.ModelMultipleChoiceField(queryset=License.objects.all(), widget=forms.CheckboxSelectMultiple)
+    driving_licenses = forms.ModelMultipleChoiceField(queryset=DrivingLicense.objects.all(), widget=forms.CheckboxSelectMultiple)
 
 class CompanyProfileUpdateForm(forms.ModelForm):
     class Meta:

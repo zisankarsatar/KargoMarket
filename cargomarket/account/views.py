@@ -20,7 +20,10 @@ def register(request):
         form = UserCreateForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, ('Kayıt Başarılı'))
             return redirect(reverse('login'))
+        else :
+            messages.error(request, ('Lütfen alanları düzgün doldurun.'))
     return render(request, template_name="account/register.html", context={"form": form})
 
 
@@ -71,9 +74,10 @@ def myprofile_edit(request):
         if p_form.is_valid() and u_form.is_valid():
             u_form.save()
             p_form.save()
-            messages.success(request,'Your Profile has been updated!')
-            
+            messages.success(request,('Profil Güncelleme Tamamlandı!'))
             return redirect('myprofile')
+        
+        messages.error(request,('Hata! Boş alan bırakmayınız!'))
     else:
         u_form = UserUpdateForm(instance=request.user)            
         try:
@@ -122,11 +126,11 @@ def change_password(request):
         if form.is_valid():
             user = form.save()
             update_session_auth_hash(request, user)  # Important!
-            messages.success(request, 'Your password was successfully updated!')
+            messages.success(request, 'Şifre Değiştirildi!')
 
-            return redirect('home')
+            return redirect('myprofile')
         else:
-            messages.error(request, 'Please correct the error below.')
+            messages.error(request, 'Hatalı işlem')
     else:
         form = PasswordChangeForm(request.user)
 

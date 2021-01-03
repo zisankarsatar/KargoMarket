@@ -15,6 +15,7 @@
 
     <!-- Custom fonts for this template-->
     <link href="{% static 'base/css/all.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'base/css/alert.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'account/style.css' %}" rel="stylesheet" type="text/css">
     <link rel="icon" type="image/png" href="{% static 'account/img/truck-icon.png' %}">
     <link
@@ -285,6 +286,27 @@
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
+                {% if messages %}
+                    <div class="row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-8">
+                            <div class="alert-content">
+                                {% for message in messages %}
+                                    {% if message.tags == 'success' %}
+                                        <div class="notice notice-success" >
+                                            {{ message}}
+                                        </div>
+                                    {% else %}
+                                        <div class="notice notice-danger" >
+                                            {{ message}}
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+
                 {% block content %} {% endblock %} 
                 <!-- /.container-fluid -->
 
@@ -335,7 +357,7 @@
     <!-- Bootstrap core JavaScript-->
     <script src="{% static 'base/js/jquery.min.js' %}"></script>
     <script src="{% static 'base/js/bootstrap.bundle.min.js' %}"></script>
-
+    <script src="{% static 'base/js/alert.js' %}"></script>
     <!-- Core plugin JavaScript-->
     <script src="{% static 'base/js/jquery.easing.min.js' %}"></script>
 

@@ -137,7 +137,9 @@
                 <h6 class="mb-0">Sertifikalar</h6>
               </div>
               <div class="col-sm-9 text-secondary">
-                {{profile.licenses}}
+                {% for license in profile.licenses.all %}
+                  {{license.license_name}}<br>
+                {% endfor %}
               </div>
             </div>
             <hr>
@@ -146,7 +148,9 @@
                 <h6 class="mb-0">Ehliyet</h6>
               </div>
               <div class="col-sm-9 text-secondary">
-                {{profile.driving_licenses}}
+               {% for license in profile.driving_licenses.all %}
+                  {{license.driving_name}}<br>
+                {% endfor %}
               </div>
             </div>
             <hr>
