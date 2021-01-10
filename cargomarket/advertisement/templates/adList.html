@@ -1,0 +1,57 @@
+{% extends 'base/base.html' %}
+{% block title %}Anasayfa{% endblock %}
+{% block pagetitle %}Welcome{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+    
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">İlanlar</h1>
+        {% if request.user.companyprofile%}
+            <a type="button" href="{% url 'create_ad' %}" class="btn btn-warning btn-circle btn-lg text-white"><i class="fa fa-plus"></i></a>
+        {% endif%}
+    </div>
+    
+    <div class="row" >
+    {% for ad in advertisement%}
+        <div class="col-xl-3 col-lg-4">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">İlan 1 #</h6>
+                    <div class="dropdown no-arrow">
+                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                            <div class="dropdown-header">Başlıkkk</div>
+                            <a class="dropdown-item" href="{% url 'detail_ad' ad.id %}">İncele</a>
+                            <a class="dropdown-item" href="#">Teklif Ver</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Profil Görüntüle</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card-body">
+                     <div class="card">
+                        <img src="https://images.unsplash.com/photo-1597386983962-7859216d7543?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1053&q=80" class="card-img-top" alt="...">
+                        <div class="card-body">
+                          <h5 class="card-title">Card title</h5>
+                          <p class="card-text">{{ad.ad_explain}}</p>
+                        </div>
+                        <div class="card-footer">
+                          
+                          <a href="{% url 'detail_ad' ad.id %}" class="btn btn-secondary">Detay Görüntüle</a>
+                          
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+         {% endfor %}
+    </div>
+   
+</div>
+{% endblock %}

@@ -7,7 +7,6 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
-from django.shortcuts import render, redirect
 
 # Create your views here.
 
@@ -44,7 +43,7 @@ def myprofile(request):
             role = 'driver'
             dp = DriverProfile.objects.get(user=user)
             form = DriverProfileForm(instance=dp)
-            profile = DriverProfile.objects.get(user=user)
+            profile = DriverProfile.objects.get(user=user) #???
         
         return render(request, template_name='account/myprofileD.html', context={'role': role, 'user': user,  'profile':profile})
     except:
@@ -106,16 +105,16 @@ def show_profile(request, user_id):
     try:
         if user.driverprofile:
             role = 'driver'
-            dp = DriverProfile.objects.get(user=user)
-            form = DriverProfileForm(instance=dp)
             profile = DriverProfile.objects.get(user=user)
+            form = DriverProfileForm(instance=profile)
+           # profile = DriverProfile.objects.get(user=user)
 
         return render(request, template_name='account/myprofileD.html', context={'role': role, 'user': user,  'profile':profile})
     except:
         role = 'company'
-        cp = CompanyProfile.objects.get(user=user)
-        form = CompanyProfileForm(instance=cp)
         profile = CompanyProfile.objects.get(user=user)
+        form = CompanyProfileForm(instance=profile)
+        #profile = CompanyProfile.objects.get(user=user)
         
     return render(request, template_name='account/myprofileC.html', context={'role': role, 'user': user,  'profile':profile})
 
@@ -135,3 +134,7 @@ def change_password(request):
         form = PasswordChangeForm(request.user)
 
     return render(request, 'account/password.html', {'form': form})
+
+
+def base(request):
+    return render(request, template_name='base/base2.html')

@@ -1,0 +1,96 @@
+{% extends 'base/base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+    <div class="container">
+        <div class="main-body">
+            <div class="row gutters-sm">
+                <div class="col-md-12 mb-3">
+                    <form action="" method="POST">
+                    {%csrf_token%}
+                        <div class="card shadow mb-4 border-secondary">
+                            <div class="card-header py-3">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <h6 class="mb-0">İlan Ekle</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <div class="row">
+                                        basliik gelecekkkk
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Açıklama</h6>
+                                        </div>
+                                        <div class="col-sm-6 text-secondary">
+                                            {% render_field form.ad_explain class="form-control input-transparent pl-3" %}
+                                        </div>  
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Son Tarih</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            {% render_field form.last_date class="form-control input-transparent pl-3" %}
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Nereden</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            {% render_field form.from_city class="form-control input-transparent pl-3" %}
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Nereye</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            {% render_field form.to_city class="form-control input-transparent pl-3" %}
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Toplam Ağırlık</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            {% render_field form.total_weight class="form-control input-transparent pl-3" %}
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Toplam Hacim</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            {% render_field form.total_volume class="form-control input-transparent pl-3" %}
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">İligli Lisanlar</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            {% render_field form.licenses class="form-control input-transparent pl-3" %}
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <button class="btn btn-outline-warning" type="submit">Güncelle</button>
+                                </div>
+                            </div>                       
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

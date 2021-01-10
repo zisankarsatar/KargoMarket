@@ -1,0 +1,138 @@
+{% extends 'base/base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+    <div class="container">
+        <div class="main-body">
+            <div class="row gutters-sm">
+                <div class="col-md-12 mb-3">
+                    {%csrf_token%}
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <h6 class="mb-0">İlan Detay</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <div class="row">
+                                    basliik gelecekkkk
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Açıklama</h6>
+                                    </div>
+                                    <div class="col-sm-6 text-secondary">
+                                        {{form.ad_explain }}
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Son Tarih</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        {{ form.last_date}}
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Nereden</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        {{ form.from_city}}
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Nereye</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        {{ form.to_city}}
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Toplam Ağırlık</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        {{ form.total_weight}}
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Toplam Hacim</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        {{ form.total_volume}}
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">İligli Lisanlar</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        {{ form.licenses}}
+                                    </div>
+                                </div>
+                                <hr>
+
+                                <div class="row">
+                                    
+                                    <div class="col-sm-3">
+                                    {% if form.user_id == request.user.id %}
+                                        <button class="btn btn-outline-warning" href="{% url 'edit_ad' form.id %}">Düzenle</button>
+                                    {% else %}
+                                        <button class="btn btn-warning" href="#">Başvur</button></div>
+                                        <div class="col-sm-9" style="text-align:right">
+                                        <button class="btn btn-outline-warning" id="new-chat-btn" type="button">
+                                            <i class="fas fa-envelope fa-sm"></i> Mesaj At
+                                        </button>
+
+                                    {% endif %}
+                                    </div>
+
+                                </div>
+                            
+                            </div>
+                        </div>                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block jscript %}
+<script>
+
+$("#new-chat-btn").on("click", function(){
+    var target_user = {{form.user.id}};
+    $.ajax({
+        url: '{% url "chatapp:create_chat" %}',
+        method: "POST",
+        data: {
+            "target_user_id": target_user,
+            "csrfmiddlewaretoken": '{{ csrf_token }}',
+        },
+        dataType: 'json',
+        success: function(data){
+            chat_id = data['chat_id'];
+            window.location.href = '{% url "chatapp:index" %}?chat_id='+chat_id;
+        },
+        error: function(err){
+            console.log(err);
+        }
+    })
+});
+</script>
+
+{% endblock %}

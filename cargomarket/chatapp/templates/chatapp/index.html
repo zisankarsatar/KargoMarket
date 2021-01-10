@@ -1,0 +1,237 @@
+{% extends "base/base.html" %}
+
+{% block title %} Chats {% endblock %}
+
+{% block jscript %}
+<script>
+    var current_user_id = {{ current_user.id }};
+    var active_chat_id;
+    var active_chat_user_id;
+    var active_chat_user_name;
+
+    var chatSocket;
+    var roomName;
+
+    // RECEIVE MESSAGES FROM SERVER 
+    function load_message(chat_id){
+        console.log(chat_id);
+        $.ajax({
+            url: '{% url "chatapp:chat_message" %}',
+            method: "POST",
+            data: {
+                "chat_id": chat_id,
+                "csrfmiddlewaretoken": '{{ csrf_token }}',
+            },
+            dataType: 'json',
+            success: function(data){
+                write_messages_to_panel(data);
+            },
+            error: function(err){
+                console.log(err);
+            }
+        })
+    }
+
+    $(document).ready(function(){
+        const urlParams = new URLSearchParams(window.location.search);
+        chat_id = urlParams.get("chat_id");
+        if (chat_id == null) {
+            console.log("Chat ID did not provided");
+        }
+        else {
+            console.log("Chat id: " + chat_id);
+            select_chat(chat_id);
+        }
+    });
+
+
+    // SEND MESSAGES TO SERVER
+    // const roomName = JSON.parse(document.getElementById('room-name').textContent);
+
+    function open_websocket() {
+        if (current_user_id < active_chat_user_id){
+            roomName = "chatx" + current_user_id + "x" + active_chat_user_id;
+        } else {
+            roomName = "chatx" + active_chat_user_id + "x" + current_user_id;
+        }
+        chatSocket = new WebSocket(
+            'ws://'
+            + window.location.host
+            + '/ws/chat/'
+            + roomName
+            + '/'
+        );
+
+        // SOCKET MESSAGE
+        chatSocket.onmessage = function(e) {
+            const data = JSON.parse(e.data);
+            console.log(data);
+            if (data.sender == current_user_id){
+                $(".chat-box").append(me_message(data.message, data.send_time));
+            }
+            else {
+                $(".chat-box").append(friend_message(data.message, data.send_time));
+            }
+            $(".chat-container").get(0).scrollTop += 9999;
+
+        };
+
+        // SOCKET CLOSE
+        chatSocket.onclose = function(e) {
+            console.error('Chat socket closed unexpectedly');
+        };
+        
+        // SOCKET UX
+        $("#chat-message-input").focus();
+        $("#chat-message-input").on("keyup", function(e) {
+            if (e.keyCode === 13) {  // enter, return
+                $("#chat-message-submit").click();
+            }
+        });
+        
+        // SOCKET SEND MESSAGE
+        $("#chat-message-submit").on("click", function(e){
+            message_text = $("#chat-message-input").val();
+            // If message is empty, don't send
+            if (message_text == "") { return }
+            chatSocket.send(JSON.stringify({
+                'chat_id': active_chat_id,
+                'message': message_text
+            }));
+            $("#chat-message-input").val("");
+        });
+    }
+
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+            <h5 class="title">Chat App</h5>
+        </div>
+    </div>
+
+
+    <div class="content-wrapper">
+
+        <!-- Row start -->
+        <div class="row gutters">
+
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
+                <div class="card m-0">
+
+                    <!-- Row start -->
+                    <div class="row no-gutters" style="min-height: 615px;">
+                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-3 col-3">
+                            <div class="users-container">
+                                <!-- SEARCH BOX -->
+                                <div class="container mb-3">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search...">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-warning" type="button">
+                                                <i class="fas fa-search fa-sm"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- USERS -->
+                                <ul class="users">
+                                    {% for chat in chats %}
+                                    <li class="person" data-chat-id="{{ chat.id }}">
+                                        <div class="user">
+                                            <img src="https://www.bootdey.com/img/Content/avatar/avatar3.png">
+                                            <span class="status online"></span>
+                                        </div>
+                                        <p class="name-time">
+                                            {% for receiver in chat.members.all %}
+                                                {% if receiver.id != current_user.id %}
+                                                <span class="name">
+                                                    {{ receiver.first_name }} {{ receiver.last_name }}
+                                                </span>
+                                                <span style="display: none;" class="id">{{ receiver.id }}</span>
+                                                {% endif %}
+                                            {% endfor %}
+                                            <span class="time">{{ chat.update_time|date:"l - d M Y" }}</span>
+                                        </p>
+                                    </li>
+                                    {% empty %}
+                                    <div class="container">Henuz bir chat yok..</div>
+                                    {% endfor %}
+                                </ul>
+
+
+                            </div>
+                        </div>
+                        <div class="col-xl-8 col-lg-8 col-md-8 col-sm-9 col-9" style="background-color: aqua;">
+                            <div class="container-fluid" id="no-chat-window">
+                                <h4 style="text-align: center; padding-top: 100px;">First please select chat from left window.</h4>
+                                
+                            </div>
+                            <div id="chat-window" style="display: none;">
+                                <div class="selected-user">
+                                <span>To: <span class="name" id="selected-user">Emily Russell</span></span>
+                            </div>
+                            <div class="chat-container" style="overflow-y: scroll; max-height: 500px; min-height: 500px;">
+                                <ul class="chat-box chatContainerScroll">
+                                </ul>
+                            </div>
+                            <div class="input-group container mt-2">
+                                <input type="text" id="chat-message-input" class="form-control border-0 small" placeholder="Type message...">
+                                <div class="input-group-append">
+                                    <button id="chat-message-submit" class="btn btn-outline-warning" type="button">
+                                        <i class="fas fa-paper-plane fa-sm"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <!-- Row end -->
+                </div>
+
+            </div>
+
+        </div>
+        <!-- Row end -->
+
+    </div>
+    <!-- Content wrapper end -->
+
+</div>
+
+
+{% endblock %}
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Chat Rooms</title>
+</head>
+<body>
+    What chat room would you like to enter?<br>
+    <input id="room-name-input" type="text" size="100"><br>
+    <input id="room-name-submit" type="button" value="Enter">
+
+    <script>
+        document.querySelector('#room-name-input').focus();
+        document.querySelector('#room-name-input').onkeyup = function(e) {
+            if (e.keyCode === 13) {  // enter, return
+                document.querySelector('#room-name-submit').click();
+            }
+        };
+
+        document.querySelector('#room-name-submit').onclick = function(e) {
+            var roomName = document.querySelector('#room-name-input').value;
+            window.location.pathname = '/chat/' + roomName + '/';
+        };
+    </script>
+</body>
+</html> -->

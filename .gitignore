@@ -1,4 +1,7 @@
 venv3/
+venv37/
 .vscode/
 *migrations*
 *db.sqlite3*
+*__pycache__*
+env3/

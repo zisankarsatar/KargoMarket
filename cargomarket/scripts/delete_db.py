@@ -16,6 +16,8 @@ def run():
     print("Current Directory: ", os.getcwd())
     paths = [
         "account/migrations",
+        "advertisement/migrations",
+        "chatapp/migrations",
         "db.sqlite3",
     ]
     for p in paths:

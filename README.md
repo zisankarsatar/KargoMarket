@@ -3,11 +3,19 @@ The cargo market portal allows companies to send their cargo to their customers 
 
 # Installation
 ```
-python3 -m venv venv3
+python3.7 -m venv venv3
 Linux   : source venv3/bin/activate
 Windows : ./venv3/bin/Scripts/Activate
 pip3 install -r requirements.txt
 ```
+
+# Requirements
+- django
+- django-extensions
+- django-widget-tweaks
+- channels
+- channels_redis
+- ipython (dev purposes)
 
 # Database Migrations
 If you want to delete the existing DB and migration scripts, please use `delete_db` command in `Scripts` section.

@@ -39,8 +39,11 @@ class DriverProfile(BaseProfile):
     experience = models.CharField('Experience', max_length=50)
     licenses = models.ManyToManyField(License, blank=True, verbose_name='Licenses')
     driving_licenses = models.ManyToManyField(DrivingLicense, blank=True, verbose_name='Driving Licenses')
-    truck_model = models.CharField('Truck Model', max_length=50, default='not specified')
-    max_capacity = models.DecimalField('Truck Capacity', max_digits=5, decimal_places=2, default="25.8")
+    truck_brand = models.CharField('Truck Brand', max_length=25)
+    truck_model = models.CharField('Truck Model', max_length=50)
+    truck_fuel = models.CharField('Truck Fuel', max_length=25)
+    truck_gear = models.CharField('Truck Gear', max_length=25)
+    max_capacity = models.DecimalField('Truck Capacity', max_digits=5, decimal_places=2)
     # review_point = models.DecimalField('Point', max_digits=2, decimal_places=1)
     
 

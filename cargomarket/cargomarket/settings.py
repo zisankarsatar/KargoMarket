@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'channels',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,6 +41,8 @@ INSTALLED_APPS = [
     'django_extensions',
     'account',
     'widget_tweaks',
+    'advertisement',
+    'chatapp',
 ]
 
 MIDDLEWARE = [
@@ -71,7 +74,15 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'cargomarket.wsgi.application'
-
+ASGI_APPLICATION = 'cargomarket.asgi.application'
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
@@ -108,7 +119,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Istanbul'
 
 USE_I18N = True
 

@@ -14,12 +14,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, reverse_lazy
+from django.urls import path, reverse_lazy, include
 from django.contrib.auth.views import LoginView, LogoutView
 from account.views import register, myprofile, home, change_password ,myprofile_edit, user_list,show_profile
+from advertisement.views import ad_list, my_ad, update_ad, create_ad, detail_ad
 
 urlpatterns = [
-    path('', home, name='home'),
+    path('', ad_list, name='home'),
     path('admin/', admin.site.urls),
     path('accounts/login/', LoginView.as_view(template_name='account/login.html'), name='login'),
     path('accounts/logout/', LogoutView.as_view(next_page=reverse_lazy('login')), name='logout'),
@@ -28,5 +29,10 @@ urlpatterns = [
     path('accounts/myprofile_edit/', myprofile_edit, name='myprofile_edit'),
     path('accounts/profile/id=<int:user_id>', show_profile, name='show_profile'),
     path('accounts/password/', change_password, name='password'),
-    path('accounts/users/', user_list, name='users') 
+    path('accounts/users/', user_list, name='users'),
+    path('my_advertisement/<int:user_id>', my_ad, name='my_ad'), 
+    path('edit_advertiesement/<int:ad_id>', update_ad, name='edit_ad'),
+    path('create_advertiesement/', create_ad, name='create_ad'),
+    path('detail_advertiesement/<int:ad_id>', detail_ad, name='detail_ad'), 
+    path('chat/', include('chatapp.urls')),
 ]
