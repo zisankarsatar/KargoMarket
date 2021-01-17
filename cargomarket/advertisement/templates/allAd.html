@@ -18,7 +18,7 @@
                             </div>
                         </div>
                     </div>
-                    {% if my_ad %}
+                    {% if ads %}
                         <div class="row">
                             <div class="col-sm-12">
                             <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
@@ -35,7 +35,7 @@
                                 <tr><th rowspan="1" colspan="1">Başlık</th><th rowspan="1" colspan="1">Yayınlanma Tarihi</th><th rowspan="1" colspan="1">Yayınlanma Durumu</th><th rowspan="1" colspan="1">Görüntülenme Sayısı</th><th rowspan="1" colspan="1">Başvurular</th></tr>
                             </tfoot>
                             <tbody> 
-                                {% for ad in my_ad %}                      
+                                {% for ad in ads %}                      
                                         <tr role="row" class="odd">
                                             <td class="sorting_1"><a href="{% url 'detail_ad' ad.id %}">{{ad.ad_title}}</a></td>
                                             <td>{{  ad.publish_date }} </td>

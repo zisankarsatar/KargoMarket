@@ -43,7 +43,7 @@ class DriverProfile(BaseProfile):
     truck_model = models.CharField('Truck Model', max_length=50)
     truck_fuel = models.CharField('Truck Fuel', max_length=25)
     truck_gear = models.CharField('Truck Gear', max_length=25)
-    max_capacity = models.DecimalField('Truck Capacity', max_digits=5, decimal_places=2)
+    max_capacity = models.DecimalField('Truck Capacity', max_digits=5, decimal_places=2, default='200')
     # review_point = models.DecimalField('Point', max_digits=2, decimal_places=1)
     
 

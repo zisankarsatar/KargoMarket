@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, reverse_lazy, include
 from django.contrib.auth.views import LoginView, LogoutView
 from account.views import register, myprofile, home, change_password ,myprofile_edit, user_list,show_profile
-from advertisement.views import ad_list, my_ad, update_ad, create_ad, detail_ad
+from advertisement.views import ad_list, my_ad, update_ad, create_ad, detail_ad, delete_ad, all_ad ,recourse ,my_recourse
 
 urlpatterns = [
     path('', ad_list, name='home'),
@@ -30,9 +30,13 @@ urlpatterns = [
     path('accounts/profile/id=<int:user_id>', show_profile, name='show_profile'),
     path('accounts/password/', change_password, name='password'),
     path('accounts/users/', user_list, name='users'),
-    path('my_advertisement/<int:user_id>', my_ad, name='my_ad'), 
+    path('my_advertisement/', my_ad, name='my_ad'), 
     path('edit_advertiesement/<int:ad_id>', update_ad, name='edit_ad'),
     path('create_advertiesement/', create_ad, name='create_ad'),
-    path('detail_advertiesement/<int:ad_id>', detail_ad, name='detail_ad'), 
+    path('detail_advertiesement/<int:ad_id>', detail_ad, name='detail_ad'),
+    path('delete_advertiesement/<int:ad_id>', delete_ad, name='delete_ad'),
+    path('all_advertiesement/', all_ad, name='all_ad'), 
+    path('recourse_advertiesement/<int:ad_id>', recourse, name='recourse'),
+    path('my_recourse/', my_recourse, name='my_recourse'), 
     path('chat/', include('chatapp.urls')),
 ]

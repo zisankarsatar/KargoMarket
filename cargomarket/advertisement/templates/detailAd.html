@@ -4,7 +4,7 @@
     <div class="container">
         <div class="main-body">
             <div class="row gutters-sm">
-                <div class="col-md-12 mb-3">
+                <div class="col-md-12 mb-3" id="ilan">
                     {%csrf_token%}
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
@@ -14,10 +14,19 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-12">
                             <div class="card-body">
                                 <div class="row">
-                                    basliik gelecekkkk
+                                    <div class="col-md-6 text-left">
+                                        {{form.ad_title}}
+                                    </div>
+                                    <div class="col-md-6 text-right">
+                                        Görüntülenme Sayısı:{{form.ad_show}}
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row" style="margin-right: auto;margin-left: auto; width:250px; heigth:175px;">
+                                    <img src="https://images.unsplash.com/photo-1597386983962-7859216d7543?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1053&q=80" class="card-img-top" alt="...">
                                 </div>
                                 <hr>
                                 <div class="row">
@@ -25,7 +34,16 @@
                                         <h6 class="mb-0">Açıklama</h6>
                                     </div>
                                     <div class="col-sm-6 text-secondary">
-                                        {{form.ad_explain }}
+                                        {{form.ad_explain}}
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Yayınlanma Tarih</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        {{form.publish_date }}
                                     </div>
                                 </div>
                                 <hr>
@@ -76,31 +94,49 @@
                                 <hr>
                                 <div class="row">
                                     <div class="col-sm-3">
-                                        <h6 class="mb-0">İligli Lisanlar</h6>
+                                        <h6 class="mb-0">İligli Sertifikalar</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        {{ form.licenses}}
+                                        {% for license in form.licenses.all %}
+                                            {{license.license_name}}<br>
+                                        {% endfor %}
                                     </div>
                                 </div>
                                 <hr>
 
                                 <div class="row">
-                                    
                                     <div class="col-sm-3">
                                     {% if form.user_id == request.user.id %}
-                                        <button class="btn btn-outline-warning" href="{% url 'edit_ad' form.id %}">Düzenle</button>
-                                    {% else %}
-                                        <button class="btn btn-warning" href="#">Başvur</button></div>
+                                        <a class="btn btn-outline-warning" href="{% url 'edit_ad' form.id %}">Düzenle</a>
+                                        <a class="btn btn-warning" href="#">Başvurular</a>
+                                    {% elif request.user.driverprofile %}
+                                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#basvuruModal">Başvur</button></div>
                                         <div class="col-sm-9" style="text-align:right">
                                         <button class="btn btn-outline-warning" id="new-chat-btn" type="button">
                                             <i class="fas fa-envelope fa-sm"></i> Mesaj At
                                         </button>
-
                                     {% endif %}
                                     </div>
-
                                 </div>
-                            
+                                <div class="modal fade" id="basvuruModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">{{form.ad_title}}</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                {{form.ad_title}} başlıklı ilan için başvurunuzu onaylıyor musunuz?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">İptal</button>
+                                                <a class="btn btn-success" href="{% url 'recourse' form.id %}">Onaylıyorum</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>                       
                     </div>

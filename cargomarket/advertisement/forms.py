@@ -1,4 +1,5 @@
 from advertisement.models import Advertisement
+from account.models import License
 
 from django import forms
 
@@ -8,20 +9,20 @@ class AdvertisementForm(forms.ModelForm):
     class Meta:
         model = Advertisement
         fields = '__all__'
-        #fields = ['ad_explain', 'from_city', 'to_city', 'publish_date','last_date','product_total_weight','product_total_volume','product_type','licenses','product_risk']
+        #fields = ['id','ad_explain', 'from_city', 'to_city', 'publish_date','last_date','total_weight','total_volume','licenses']
         exclude = ['user']
 
-        publish_date = forms.DateField(input_formats='%Y,%m,%d',widget=forms.SelectDateWidget())
-        last_date = forms.DateField(input_formats='%Y,%m,%d',widget=forms.SelectDateWidget())
+        licenses = forms.ModelMultipleChoiceField(queryset=License.objects.all(), widget=forms.CheckboxSelectMultiple)
+        publish_date = forms.DateField(input_formats='%d/%m/%Y',widget=forms.SelectDateWidget())
+        last_date = forms.DateField(input_formats='%d/%m/%Y',widget=forms.SelectDateWidget())
 
-
-class AdFormUpdate(forms.ModelForm):
+class AdvertisementEditForm(forms.ModelForm):
 
     class Meta:
         model = Advertisement
-        fields = '__all__'
-        #fields = ['ad_explain', 'from_city', 'to_city', 'publish_date','last_date','product_total_weight','product_total_volume','product_type','licenses','product_risk','user']
-        # exclude = ['user']
+        fields = ['id','ad_title','ad_explain', 'from_city', 'to_city', 'publish_date','last_date','total_weight','total_volume','licenses']
+        exclude = ['user']
 
-        publish_date = forms.DateField(input_formats='%Y,%m,%d',widget=forms.SelectDateWidget())
-        last_date = forms.DateField(input_formats='%Y,%m,%d',widget=forms.SelectDateWidget())
+        licenses = forms.ModelMultipleChoiceField(queryset=License.objects.all(), widget=forms.CheckboxSelectMultiple)
+        publish_date = forms.DateField(input_formats='%d/%m/%Y',widget=forms.SelectDateWidget())
+        last_date = forms.DateField(input_formats='%d/%m/%Y',widget=forms.SelectDateWidget())

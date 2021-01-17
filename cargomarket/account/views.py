@@ -134,7 +134,3 @@ def change_password(request):
         form = PasswordChangeForm(request.user)
 
     return render(request, 'account/password.html', {'form': form})
-
-
-def base(request):
-    return render(request, template_name='base/base2.html')

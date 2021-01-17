@@ -19,32 +19,30 @@
         <div class="col-xl-3 col-lg-4">
             <div class="card shadow mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">İlan 1 #</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">{{ad.ad_title}}</h6>
                     <div class="dropdown no-arrow">
                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                            <div class="dropdown-header">Başlıkkk</div>
+                            <div class="dropdown-header">{{ad.ad_title}}</div>
                             <a class="dropdown-item" href="{% url 'detail_ad' ad.id %}">İncele</a>
                             <a class="dropdown-item" href="#">Teklif Ver</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Profil Görüntüle</a>
+                            <a class="dropdown-item" href="{% url 'show_profile' ad.user_id %}">Profil Görüntüle</a>
                         </div>
                     </div>
                 </div>
                 
                 <div class="card-body">
-                     <div class="card">
+                    <div class="card">
                         <img src="https://images.unsplash.com/photo-1597386983962-7859216d7543?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1053&q=80" class="card-img-top" alt="...">
                         <div class="card-body">
-                          <h5 class="card-title">Card title</h5>
                           <p class="card-text">{{ad.ad_explain}}</p>
-                        </div>
-                        <div class="card-footer">
-                          
                           <a href="{% url 'detail_ad' ad.id %}" class="btn btn-secondary">Detay Görüntüle</a>
-                          
+                        </div>
+                        <div class="card-footer text-right">
+                          <i class="fas fa-eye"> {{ad.ad_show}} </i>
                         </div>
                     </div>
                 </div>

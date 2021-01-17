@@ -4,7 +4,7 @@
     <div class="container">
         <div class="main-body">
             <div class="row gutters-sm">
-                <div class="col-md-12 mb-3">
+                <div class="col-md-12 mb-3" id="ilan">
                     <form action="" method="POST">
                     {%csrf_token%}
                         <div class="card shadow mb-4 border-secondary">
@@ -15,72 +15,61 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-8">
+                            <div class="col-md-12">
                                 <div class="card-body">
                                     <div class="row">
-                                        basliik gelecekkkk
+                                        <h6 class="mb-0">Başlık</h6>
+                                        {% render_field form.ad_title %}
                                     </div>
                                     <hr>
                                     <div class="row">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0">Açıklama</h6>
+                                        <div class="col-sm-6 " style="width:250px; heigth:175px;">
+                                            <img src="https://images.unsplash.com/photo-1597386983962-7859216d7543?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1053&q=80" class="card-img-top" alt="...">
                                         </div>
-                                        <div class="col-sm-6 text-secondary">
+                                        
+                                        <div class="col-sm-6 text-secondary" style="heigth:100px">
+                                            <h6 class="mb-0">Açıklama</h6>
                                             {% render_field form.ad_explain class="form-control input-transparent pl-3" %}
                                         </div>  
                                     </div>
                                     <hr>
                                     <div class="row">
-                                        <div class="col-sm-3">
+                                        <div class="col-sm-6 text-secondary">
+                                            <h6 class="mb-0">Yayınlanma Tarihi</h6>
+                                            {% render_field form.publish_date class="form-control input-transparent pl-3" %}
+                                        </div>                                   
+                                        <div class="col-sm-6 text-secondary">
                                             <h6 class="mb-0">Son Tarih</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary">
                                             {% render_field form.last_date class="form-control input-transparent pl-3" %}
                                         </div>
                                     </div>
                                     <hr>
                                     <div class="row">
-                                        <div class="col-sm-3">
+                                        <div class="col-sm-6 text-secondary">
                                             <h6 class="mb-0">Nereden</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary">
                                             {% render_field form.from_city class="form-control input-transparent pl-3" %}
                                         </div>
-                                    </div>
-                                    <hr>
-                                    <div class="row">
-                                        <div class="col-sm-3">
+                                        <div class="col-sm-6 text-secondary">
                                             <h6 class="mb-0">Nereye</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary">
                                             {% render_field form.to_city class="form-control input-transparent pl-3" %}
                                         </div>
                                     </div>
                                     <hr>
                                     <div class="row">
-                                        <div class="col-sm-3">
+                                        <div class="col-sm-6 text-secondary">
                                             <h6 class="mb-0">Toplam Ağırlık</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary">
                                             {% render_field form.total_weight class="form-control input-transparent pl-3" %}
                                         </div>
-                                    </div>
-                                    <hr>
-                                    <div class="row">
-                                        <div class="col-sm-3">
+                                        <div class="col-sm-6 text-secondary">
                                             <h6 class="mb-0">Toplam Hacim</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary">
                                             {% render_field form.total_volume class="form-control input-transparent pl-3" %}
                                         </div>
                                     </div>
                                     <hr>
                                     <div class="row">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0">İligli Lisanlar</h6>
-                                        </div>
                                         <div class="col-sm-9 text-secondary">
-                                            {% render_field form.licenses class="form-control input-transparent pl-3" %}
+                                            <h6 class="mb-0">İligli Lisanlar</h6>
+                                            {% render_field form.licenses %}
                                         </div>
                                     </div>
                                     <hr>

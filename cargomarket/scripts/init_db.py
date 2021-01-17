@@ -128,9 +128,24 @@ def run():
     
     adp.save()
     
-    #adp.product_type.add(yuksek)
     adp.licenses.add(patlayici)
     adp.save()
+
+    #Create a new Advertisement 
+    adp2 = Advertisement()
+    adp2.ad_explain = 'Ham madde taşınması, Ağır metal içerir.'
+    adp2.from_city = 'İstanbul'
+    adp2.to_city = 'İzmir'
+    adp2.publish_date = localdate()
+    adp2.last_date = localdate()
+    adp2.total_weight = '900 Kg'
+    adp2.total_volume = '50 '
+    adp2.user = company_user
+    
+    adp2.save()
+    
+    adp2.licenses.add(patlayici)
+    adp2.save()
 
     cp.age= "21"
     cp.gender = "Kadın"
