@@ -2,11 +2,11 @@
 {% block title %}İlanlarım{% endblock %}
 
 {% block content %}
-<div class="container-fluid">
+<div class="container-fluid offset-md-2 col-md-8 mb-3">
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">İlanlarım</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Tüm ilanlar</h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -28,11 +28,10 @@
                                     <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 99px;">Yayınlanma Tarihi</th>
                                     <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 53px;">Yayınlanma Durumu</th>
                                     <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 53px;">Görüntülenme Sayısı</th>
-                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 53px;">Başvurular</th>
                                 </tr>
                             </thead>
                             <tfoot>
-                                <tr><th rowspan="1" colspan="1">Başlık</th><th rowspan="1" colspan="1">Yayınlanma Tarihi</th><th rowspan="1" colspan="1">Yayınlanma Durumu</th><th rowspan="1" colspan="1">Görüntülenme Sayısı</th><th rowspan="1" colspan="1">Başvurular</th></tr>
+                                <tr><th rowspan="1" colspan="1">Başlık</th><th rowspan="1" colspan="1">Yayınlanma Tarihi</th><th rowspan="1" colspan="1">Yayınlanma Durumu</th><th rowspan="1" colspan="1">Görüntülenme Sayısı</th></tr>
                             </tfoot>
                             <tbody> 
                                 {% for ad in ads %}                      
@@ -45,14 +44,16 @@
                                                 <td> Silindi </td>
                                             {% endif %}
                                             <td>{{  ad.ad_show }} </td>
-                                            <td>{{  ad.applicants }} </td>
                                         </tr>
                                 {% endfor %}
                             </tbody>
                             </table>
                         </div>
                     {% else %}
-                        <p>No polls are available.</p>
+                        <div class="offset-md-4 col-md-6">
+                            <p>No polls are available.</p>
+                            <i class="fad fa-forklift"></i>
+                        </div>
                     {% endif %}
                 </div>
             </div>

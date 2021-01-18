@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, reverse_lazy, include
 from django.contrib.auth.views import LoginView, LogoutView
 from account.views import register, myprofile, home, change_password ,myprofile_edit, user_list,show_profile
-from advertisement.views import ad_list, my_ad, update_ad, create_ad, detail_ad, delete_ad, all_ad ,recourse ,my_recourse
+from advertisement.views import ad_list, my_ad, update_ad, create_ad, detail_ad, delete_ad, all_ad ,recourse ,my_recourse, applicants_list ,state_set
 
 urlpatterns = [
     path('', ad_list, name='home'),
@@ -38,5 +38,7 @@ urlpatterns = [
     path('all_advertiesement/', all_ad, name='all_ad'), 
     path('recourse_advertiesement/<int:ad_id>', recourse, name='recourse'),
     path('my_recourse/', my_recourse, name='my_recourse'), 
+    path('applicants/<int:ad_id>', applicants_list, name='app_list'),
+    path('applicants/<int:app_id>/<int:state>', state_set, name='state_set'),
     path('chat/', include('chatapp.urls')),
 ]

@@ -1,0 +1,62 @@
+{% extends 'base/base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+    <div class="container-fluid">
+        <!-- DataTales Example -->
+        {% if appList %}
+            <div class="card shadow mb-4 offset-md-1 col-md-10">
+        
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary"> ' {{ad.ad_title}} ' ilanı için başvuru listesi</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+                                <thead>
+                                    <tr role="row">
+                                        <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 69px;">İsim</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 53px;">Başvurulma Tarihi</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 99px;">Durum</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr><th rowspan="1" colspan="1">İsim</th><th rowspan="1" colspan="1">Başvurulma Tarihi</th><th rowspan="1" colspan="1">Durum</th></tr>
+                                </tfoot>
+                            
+                                <tbody> 
+                                    {% for app in appList %}
+                                        {% for user in users %}
+                                            {% if user.id == app.user_id %}
+                                                <tr role="row" class="odd">                                                
+                                                    <td class="sorting_1"><a href="{% url 'show_profile' user.id %}">{{user.first_name}} {{user.last_name}}</a></td>
+                                                    <td>{{app.app_date}}</td>
+                                                    {% if app.app_state == 0 %}
+                                                        <td><a class="btn btn-success" href="{% url 'state_set' app.id 1 %}">Onayla</a>
+                                                        <a class="btn btn-danger" href="{% url 'state_set' app.id 2 %}">Reddet</a> </td> 
+                                                    {% elif app.app_state == 1 %}
+                                                        <td>Onaylandı <i class="far fa-smile"></td>
+                                                    {% else %}
+                                                        <td>Reddedildi <i class="far fa-frown"></i> </td>
+                                                    {% endif %}
+                                                </tr>
+                                            {% endif %}  
+                                        {% endfor %}     
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="offset-md-4 col-md-6 d-felx" style="margin-top:120px;">
+            <h2><i class="fas fa-dolly"></i> İlanınız için başvuru yapılmadı.</h2>
+        </div>
+    {% endif %}
+</div>
+
+{% endblock %}

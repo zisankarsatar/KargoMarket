@@ -22,4 +22,12 @@ class Advertisement(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     ad_state=models.IntegerField('Ad State', default=1)
     ad_show=models.IntegerField('Ad Show', default=0)
-    applicants = models.ManyToManyField(User, blank=True, related_name='Applicants', default='')
+    #apps = models.ManyToManyField(Application, blank=True, verbose_name='Applications')
+
+
+class Application(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE) #user olarak düzelt
+    add_id = models.IntegerField('Ad id') #ad_id olarak düzelt
+    app_date = models.DateField('Application Date')
+    app_state = models.IntegerField('app state', default = 0) #0 görülmemiş, 1 onaylanmış , 2 red
+    

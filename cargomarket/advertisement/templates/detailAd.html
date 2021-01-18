@@ -1,16 +1,23 @@
 {% extends 'base/base.html' %}
 {% load widget_tweaks %}
 {% block content %}
-    <div class="container">
+    <div class="container-fluid">
         <div class="main-body">
             <div class="row gutters-sm">
-                <div class="col-md-12 mb-3" id="ilan">
+                <div class="offset-md-2 col-md-8 mb-3" id="ilan">
                     {%csrf_token%}
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <div class="row">
                                 <div class="col-sm-4">
                                     <h6 class="mb-0">İlan Detay</h6>
+                                </div>
+                                <div class="offset-md-2 col-sm-6 text-right">
+                                {% if form.user_id != request.user.id %}
+                                    <a href={% url 'show_profile' form.user_id %}>
+                                        <h6 class="mb-0">İlan Sahibi Profil İncele</h6>
+                                    </a>
+                                {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -108,13 +115,17 @@
                                     <div class="col-sm-3">
                                     {% if form.user_id == request.user.id %}
                                         <a class="btn btn-outline-warning" href="{% url 'edit_ad' form.id %}">Düzenle</a>
-                                        <a class="btn btn-warning" href="#">Başvurular</a>
+                                        <a class="btn btn-warning" href="{% url 'app_list' form.id %}">Başvurular</a>
                                     {% elif request.user.driverprofile %}
-                                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#basvuruModal">Başvur</button></div>
+                                        {% if showApp == 0 %}
+                                            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#basvuruModal">Başvur</button></div>
+                                        {% else %}
+                                            Başvuru Yaptınız.<i class="fas fa-check"></i></div>
+                                        {% endif %}
                                         <div class="col-sm-9" style="text-align:right">
-                                        <button class="btn btn-outline-warning" id="new-chat-btn" type="button">
-                                            <i class="fas fa-envelope fa-sm"></i> Mesaj At
-                                        </button>
+                                            <button class="btn btn-outline-warning" id="new-chat-btn" type="button">
+                                                <i class="fas fa-envelope fa-sm"></i> Mesaj At
+                                            </button>
                                     {% endif %}
                                     </div>
                                 </div>

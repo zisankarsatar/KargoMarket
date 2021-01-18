@@ -117,6 +117,7 @@ def run():
 
     #Create a new Advertisement 
     adp = Advertisement()
+    adp.ad_title = 'Cam'
     adp.ad_explain = 'Hızlı teslimat gerekir, cam içerir.'
     adp.from_city = 'Kahramanmaraş'
     adp.to_city = 'İzmir'
@@ -133,6 +134,7 @@ def run():
 
     #Create a new Advertisement 
     adp2 = Advertisement()
+    adp2.ad_title = 'Demir.'
     adp2.ad_explain = 'Ham madde taşınması, Ağır metal içerir.'
     adp2.from_city = 'İstanbul'
     adp2.to_city = 'İzmir'

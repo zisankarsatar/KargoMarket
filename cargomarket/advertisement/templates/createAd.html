@@ -1,12 +1,13 @@
 {% extends 'base/base.html' %}
 {% load widget_tweaks %}
 {% block content %}
-    <div class="container">
+
+    <div class="container-fluid">
         <div class="main-body">
             <div class="row gutters-sm">
-                <div class="col-md-12 mb-3" id="ilan">
-                    <form action="" method="POST">
-                    {%csrf_token%}
+                <div class="offset-md-2 col-md-8 mb-3" id="ilan">
+                    <form enctype="multipart/form-data" method = "POST">
+                    {% csrf_token %}
                         <div class="card shadow mb-4 border-secondary">
                             <div class="card-header py-3">
                                 <div class="row">
@@ -18,12 +19,16 @@
                             <div class="col-md-12">
                                 <div class="card-body">
                                     <div class="row">
-                                        <h6 class="mb-0">Başlık</h6>
-                                        {% render_field form.ad_title %}
+                                        <div class="col-sm-1">
+                                            <h6 class="mb-0">Başlık</h6>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            {% render_field form.ad_title class="form-control input-transparent pl-3" %}
+                                        </div>
                                     </div>
                                     <hr>
                                     <div class="row">
-                                        <div class="col-sm-6 " style="width:250px; heigth:175px;">
+                                        <div class="col-sm-6 " style="width:200px; heigth:150px;">
                                             <img src="https://images.unsplash.com/photo-1597386983962-7859216d7543?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1053&q=80" class="card-img-top" alt="...">
                                         </div>
                                         
@@ -36,11 +41,11 @@
                                     <div class="row">
                                         <div class="col-sm-6 text-secondary">
                                             <h6 class="mb-0">Yayınlanma Tarihi</h6>
-                                            {% render_field form.publish_date class="form-control input-transparent pl-3" %}
+                                            {% render_field form.publish_date class="form-control"%}
                                         </div>                                   
                                         <div class="col-sm-6 text-secondary">
                                             <h6 class="mb-0">Son Tarih</h6>
-                                            {% render_field form.last_date class="form-control input-transparent pl-3" %}
+                                            {% render_field form.last_date class="form-control" %}
                                         </div>
                                     </div>
                                     <hr>
@@ -69,7 +74,7 @@
                                     <div class="row">
                                         <div class="col-sm-9 text-secondary">
                                             <h6 class="mb-0">İligli Lisanlar</h6>
-                                            {% render_field form.licenses %}
+                                            {% render_field form.licenses class="form-control" %}
                                         </div>
                                     </div>
                                     <hr>

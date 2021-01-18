@@ -4,7 +4,8 @@
 {% block content %}
 <div class="container-fluid">
     <!-- DataTales Example -->
-    <div class="card shadow mb-4">
+    {% if my_ad %}
+    <div class="card shadow mb-4 offset-md-1 col-md-10">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">İlanlarım</h6>
         </div>
@@ -18,8 +19,7 @@
                             </div>
                         </div>
                     </div>
-                    {% if my_ad %}
-                        <div class="row">
+                    <div class="row">
                             <div class="col-sm-12">
                             <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
                             <thead>
@@ -28,11 +28,10 @@
                                     <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 99px;">Yayınlanma Tarihi</th>
                                     <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 53px;">Yayınlanma Durumu</th>
                                     <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 53px;">Görüntülenme Sayısı</th>
-                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 53px;">Başvurular</th>
                                 </tr>
                             </thead>
                             <tfoot>
-                                <tr><th rowspan="1" colspan="1">Başlık</th><th rowspan="1" colspan="1">Yayınlanma Tarihi</th><th rowspan="1" colspan="1">Yayınlanma Durumu</th><th rowspan="1" colspan="1">Görüntülenme Sayısı</th><th rowspan="1" colspan="1">Başvurular</th></tr>
+                                <tr><th rowspan="1" colspan="1">Başlık</th><th rowspan="1" colspan="1">Yayınlanma Tarihi</th><th rowspan="1" colspan="1">Yayınlanma Durumu</th><th rowspan="1" colspan="1">Görüntülenme Sayısı</th></tr>
                             </tfoot>
                             <tbody> 
                                 {% for ad in my_ad %}                      
@@ -45,18 +44,19 @@
                                                 <td> Silindi </td>
                                             {% endif %}
                                             <td>{{  ad.ad_show }} </td>
-                                            <td>{{  ad.applicants }} </td>
                                         </tr>
                                 {% endfor %}
                             </tbody>
                             </table>
-                        </div>
-                    {% else %}
-                        <p>No polls are available.</p>
-                    {% endif %}
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    {% else %}
+        <div class="offset-md-4 col-md-6 d-felx" style="margin-top:120px;">
+            <h2><i class="fas fa-boxes"></i> Henüz İlan Yayınlamadınız </h2>
+        </div>
+    {% endif %}
 </div>
 {% endblock %}
