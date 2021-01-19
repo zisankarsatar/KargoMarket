@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from advertisement.models import Advertisement, Application
-from advertisement.forms import AdvertisementForm, AdvertisementEditForm
+#from account.models import License
+from advertisement.forms import AdvertisementForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.utils.timezone import localdate
@@ -10,27 +11,33 @@ from django.utils.timezone import localdate
 
 @login_required
 def ad_list(request):
-    user = User.objects.get(username=request.user.username)
-    advertisement = Advertisement.objects.filter(ad_state=1).all()
+    user = request.user
+    search_post = request.GET.get('search')
+    if search_post :
+        advertisement = Advertisement.objects.filter(ad_title__contains=search_post, ad_state=1)
+    else :
+        advertisement = Advertisement.objects.filter(ad_state=1).all()
 
     return render(request, template_name="adList.html", context={'user' : user, 'advertisement':advertisement})
 
 @login_required
 def create_ad(request):
-    user = User.objects.get(username=request.user.username)
+    user = request.user
+    #all_l = License.objects.all()
     if user.first_name :
-        form = AdvertisementForm()
+        form = AdvertisementForm()    
         if request.method == 'POST':
-            form = AdvertisementForm(request.POST, instance=user)
+            form = AdvertisementForm(request.POST)
             if form.is_valid():
-                form.save()
-
+                new_ad = form.save(commit=False)
+                new_ad.user = user
+                new_ad.save()
                 messages.success(request, ('Kayıt Başarılı'))
                 return redirect('my_ad')
             else :
                 messages.error(request, ('Lütfen alanları eksiksiz doldurun.'))
         
-        return render(request, template_name="createAd.html", context={'user':user, 'form':form})
+        return render(request, template_name="createAd.html", context={'user':user, 'form':form}) #, 'all_l': all_l})
 
     else : 
         messages.error(request,('Önce Profil bilgilerinizi doldurunuz!'))
@@ -39,11 +46,11 @@ def create_ad(request):
 
 @login_required
 def update_ad(request, ad_id):
-    user = User.objects.get(username=request.user.username)
+    user = request.user
     adp = Advertisement.objects.get(id=ad_id)
-    dltId=ad_id
+
     if request.method == 'POST':
-        form = AdvertisementEditForm(request.POST, instance=adp)
+        form = AdvertisementForm(request.POST, instance=adp)
 
         if form.is_valid():
             form.save()
@@ -52,12 +59,17 @@ def update_ad(request, ad_id):
     else:
         form = AdvertisementForm(instance=adp)
 
-    return render(request, template_name='updateAd.html', context={'user':user, 'form':form, 'dltId':dltId})
+
+    return render(request, template_name='updateAd.html', context={'user':user, 'form':form, 'dltId':ad_id, 'last_date': str(adp.last_date) })
 
 @login_required
 def my_ad(request):
-    user = User.objects.get(id=request.user.id)
-    my_ad = Advertisement.objects.filter(user_id=request.user.id)
+    user = request.user
+    search_post = request.GET.get('search')
+    if search_post :
+        my_ad = Advertisement.objects.filter(ad_title__contains=search_post)
+    else : 
+        my_ad = Advertisement.objects.filter(user_id=request.user.id)
 
     return render(request, template_name="myAd.html", context={'user' : user, 'my_ad':my_ad})
 
@@ -91,7 +103,11 @@ def delete_ad(request, ad_id):
     
 @login_required
 def all_ad(request):
-    ads = Advertisement.objects.all()
+    search_post = request.GET.get('search')
+    if search_post :
+        ads = Advertisement.objects.filter(ad_title__contains=search_post)
+    else : 
+        ads = Advertisement.objects.all()
 
     return render(request, template_name="allAd.html", context={'ads':ads})
 
@@ -117,10 +133,15 @@ def recourse(request, ad_id):
 
 @login_required
 def my_recourse(request):
-    user = User.objects.get(id=request.user.id)
-    applist = Application.objects.filter(user_id=user.id) #kullanıcın tüm başvuruları çekilir
-    adlist = Advertisement.objects.filter(ad_state=1).all() #ilan bilgilerini yazdırmak için tüm ilanlar çekilir, bu kod değişmeli
+    user = request.user
+    search_post = request.GET.get('search')
+    if search_post :
+        adlist = Advertisement.objects.filter(ad_title__contains=search_post,ad_state=1)
+    else : 
+        adlist = Advertisement.objects.filter(ad_state=1).all() #ilan bilgilerini yazdırmak için tüm ilanlar çekilir, bu kod değişmeli
 
+    applist = Application.objects.filter(user_id=user.id) #kullanıcın tüm başvuruları çekilir
+    
     return render(request, template_name="myRecourse.html", context={"applist":applist, 'adlist':adlist})
 
 @login_required

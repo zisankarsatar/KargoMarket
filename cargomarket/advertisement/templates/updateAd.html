@@ -5,6 +5,12 @@
         <div class="main-body">
             <div class="row gutters-sm">
                 <div class="offset-md-1 col-md-10 mb-3" id="ilan">
+                    <!-- <form action="{% url 'edit_ad' dltId %}" method="POST">
+                        {% csrf_token %}
+                        {{ form }}
+                        <input type="submit">
+
+                    </form> -->
                     <form method="POST" enctype="multipart/form-data">
                     {%csrf_token%}
                         <div class="card shadow mb-4 border-secondary">
@@ -18,28 +24,26 @@
                             <div class="col-md-12">
                                 <div class="card-body">
                                     <div class="row">
-                                        <h6 class="mb-0">Başlık</h6>
-                                        {% render_field form.ad_title class="form-control input-transparent pl-3" %}
+                                        <div class="col-sm-6 text-secondary" style="display:flex">
+                                            <h6 class="mb-0 mt-2">Başlık</h6>
+                                            {% render_field form.ad_title class="form-control input-transparent pl-3" %}
+                                        </div>
                                     </div>
                                     <hr>
                                     <div class="row" style="heigth:200px">
                                         <div class="col-sm-6 align-center" style="width:250px; heigth:175px;">
                                             <img src="https://images.unsplash.com/photo-1597386983962-7859216d7543?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1053&q=80" class="card-img-top" alt="...">
                                         </div>
-                                        <div class="col-sm-6 text-secondary" style="heigth:100px">
+                                        <div class="col-sm-6 text-secondary">
                                             <h6 class="mb-0">Açıklama</h6>
-                                            {% render_field form.ad_explain class="form-control input-transparent pl-3" %}
+                                            {% render_field form.ad_explain class="form-control input-transparent pl-3" style="rows:5"%}
                                         </div>  
                                     </div>
                                     <hr>
-                                    <div class="row">
-                                        <div class="col-sm-6 text-secondary">
-                                            <h6 class="mb-0">Yayınlanma Tarihi</h6>
-                                            {% render_field form.publish_date class="form-control input-transparent pl-3" %}
-                                        </div>                                   
+                                    <div class="row">                                   
                                         <div class="col-sm-6 text-secondary">
                                             <h6 class="mb-0">Son Tarih</h6>
-                                            {% render_field form.last_date class="form-control input-transparent pl-3" %}
+                                            <input type="date" value="{{ last_date }}" name="last_date" class="form-control input-transparent pl-3"/>
                                         </div>
                                     </div>
                                     <hr>
@@ -68,7 +72,7 @@
                                     <div class="row">
                                         <h6 class="mb-0">İligli Lisanlar</h6>
                                         <div class="col-sm-6 text-secondary">
-                                            {% render_field form.licenses class="form-control" %}
+                                            {% render_field form.licenses %}
                                         </div>
                                     </div>
                                     <hr>
@@ -98,6 +102,8 @@
                             </div>
                         </div>
                     </form>
+
+
                 </div>
             </div>
         </div>

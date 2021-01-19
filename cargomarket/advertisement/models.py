@@ -13,7 +13,7 @@ class Advertisement(models.Model):
     ad_explain = models.TextField('Ad Explain', max_length = 500)
     from_city = models.CharField('From City', max_length = 25)
     to_city = models.CharField('To City', max_length = 25)
-    publish_date = models.DateField('Publish Date')
+    publish_date = models.DateField('Publish Date', auto_now_add=True)
     last_date = models.DateField('Last Date')
     total_weight = models.CharField('Product Weigth', max_length=25)
     total_volume = models.CharField('Product Volume', max_length=25)

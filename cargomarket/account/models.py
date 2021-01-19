@@ -45,10 +45,15 @@ class DriverProfile(BaseProfile):
     truck_gear = models.CharField('Truck Gear', max_length=25)
     max_capacity = models.DecimalField('Truck Capacity', max_digits=5, decimal_places=2, default='200')
     # review_point = models.DecimalField('Point', max_digits=2, decimal_places=1)
-    
+
+    def __str__(self):
+        return 'Driver: {}'.format(self.user.username)    
 
 class CompanyProfile(BaseProfile):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     explain=models.CharField('Bio Explain', max_length=500)
     address = models.CharField('Address', max_length=200) 
     vd_no = models.CharField('VD. No', max_length=50)
+
+    def __str__(self):
+        return 'Company: {}'.format(self.user.username)

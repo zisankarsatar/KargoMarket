@@ -15,7 +15,7 @@
                                 <div class="offset-md-2 col-sm-6 text-right">
                                 {% if form.user_id != request.user.id %}
                                     <a href={% url 'show_profile' form.user_id %}>
-                                        <h6 class="mb-0">İlan Sahibi Profil İncele</h6>
+                                        <h6 class="mb-0"><i class="fas fa-chalkboard-teacher"></i> Profil İncele</h6>
                                     </a>
                                 {% endif %}
                                 </div>
@@ -28,7 +28,7 @@
                                         {{form.ad_title}}
                                     </div>
                                     <div class="col-md-6 text-right">
-                                        Görüntülenme Sayısı:{{form.ad_show}}
+                                        <i class="fas fa-eye"></i> {{form.ad_show}}
                                     </div>
                                 </div>
                                 <hr>

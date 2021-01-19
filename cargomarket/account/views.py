@@ -57,7 +57,7 @@ def myprofile(request):
 
 @login_required
 def myprofile_edit(request):
-    user = User.objects.get(username=request.user.username)
+    user = request.user
     if request.method == 'POST':
         u_form = UserUpdateForm(request.POST, instance=request.user)
         try:
@@ -95,7 +95,11 @@ def myprofile_edit(request):
    
 @login_required
 def user_list(request):
-    users = User.objects.all()
+    search_post = request.GET.get('search')
+    if search_post :
+        users = User.objects.filter(username__contains=search_post)
+    else : 
+        users = User.objects.all()
 
     return render(request, template_name="account/users.html", context={'users' : users})
 

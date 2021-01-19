@@ -11,6 +11,21 @@
             <div class="card-body">
                 <div class="table-responsive">
                     <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                        <a class="btn btn-warning" href="{% url 'my_recourse' %}"><i class="fas fa-arrow-left"></i></a>
+                        <form action="{% url 'my_recourse' %}"
+                            class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" style="float:right">
+                            <div class="input-group">
+                                <input type="text" class="form-control bg-light border-0 small" placeholder="İlan başlığını giriniz.."
+                                    aria-label="Search" aria-describedby="basic-addon2" name="search">
+                                <div class="input-group-append">
+                                    <button class="btn btn-warning" type="submit" >
+                                        <i class="fas fa-search fa-sm"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        <br/>
+                        <br/>
                         <div class="row">
                             <div class="col-sm-12">
                                 <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
@@ -21,9 +36,6 @@
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 99px;">Durum</th>
                                         </tr>
                                     </thead>
-                                <tfoot>
-                                    <tr><th rowspan="1" colspan="1">İlan Başlığı:</th><th rowspan="1" colspan="1">Başvurulma Tarihi</th><th rowspan="1" colspan="1">Durum</th></tr>
-                                </tfoot>
                                 <tbody> 
                                     {% for app in applist %} 
                                         {% for ad in adlist  %} 
