@@ -8,7 +8,6 @@ class BaseProfile(models.Model):
     phone_number = models.CharField('Phone number', max_length=11)
     websiteUrl = models.CharField('website', max_length=50 , default="www.website.com")
     facebookUrl = models.CharField('facebook', max_length=50 , default="www.facebook.com")
-    #profile_pic = models.CharField('profile_pic', max_length=50)
     
     class Meta:
         abstract = True
@@ -33,7 +32,6 @@ class DrivingLicense(models.Model):
 class DriverProfile(BaseProfile):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     age = models.CharField('Age', max_length=3)
-    gender = models.CharField('Gender', max_length=5) 
     nationality = models.CharField('Nationality', max_length=50)
     languages = models.CharField('Languages', max_length=100)
     experience = models.CharField('Experience', max_length=50)
@@ -44,16 +42,17 @@ class DriverProfile(BaseProfile):
     truck_fuel = models.CharField('Truck Fuel', max_length=25)
     truck_gear = models.CharField('Truck Gear', max_length=25)
     max_capacity = models.DecimalField('Truck Capacity', max_digits=5, decimal_places=2, default='200')
-    # review_point = models.DecimalField('Point', max_digits=2, decimal_places=1)
+    profile_pic = models.CharField('Profile Pic', max_length=400, default="https://lh3.googleusercontent.com/proxy/QCXzPUrnqqkX-cZFyQ3TBYrpduTFBjg7ifzx_SB4EPnIwpBf6WUDxwrHRgXK2xxO5fZwZSBPWlfVhhoTJdjeZPxGhcQrCqcLT_SRmr9idRZlZ_dRTNqAistv1nfifi25F-V9XkV-5fBpDyk-PzqSGoU3Gg")
 
     def __str__(self):
         return 'Driver: {}'.format(self.user.username)    
 
 class CompanyProfile(BaseProfile):
+    picture  = models.CharField('Profile Pic', max_length=400, default="https://images.unsplash.com/photo-1550136513-548af4445338?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1054&q=80")
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     explain=models.CharField('Bio Explain', max_length=500)
     address = models.CharField('Address', max_length=200) 
-    vd_no = models.CharField('VD. No', max_length=50)
+    vd_no = models.CharField('VD. No', max_length=50, blank=True)
 
     def __str__(self):
         return 'Company: {}'.format(self.user.username)

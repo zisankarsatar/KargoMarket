@@ -33,7 +33,7 @@
                                 </div>
                                 <hr>
                                 <div class="row" style="margin-right: auto;margin-left: auto; width:250px; heigth:175px;">
-                                    <img src="https://images.unsplash.com/photo-1597386983962-7859216d7543?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1053&q=80" class="card-img-top" alt="...">
+                                    <img src="{{form.img}}" class="card-img-top" alt="...">
                                 </div>
                                 <hr>
                                 <div class="row">
@@ -114,8 +114,12 @@
                                 <div class="row">
                                     <div class="col-sm-3">
                                     {% if form.user_id == request.user.id %}
-                                        <a class="btn btn-outline-warning" href="{% url 'edit_ad' form.id %}">Düzenle</a>
-                                        <a class="btn btn-warning" href="{% url 'app_list' form.id %}">Başvurular</a>
+                                        {% if form.ad_state == 1 %}
+                                            <a class="btn btn-outline-warning" href="{% url 'edit_ad' form.id %}">Düzenle</a>
+                                            <a class="btn btn-warning" href="{% url 'app_list' form.id %}">Başvurular</a>
+                                        {% else %}
+                                            <p>İlan Silindi <i class="fas fa-times"></i></p>
+                                        {% endif %}
                                     {% elif request.user.driverprofile %}
                                         {% if showApp == 0 %}
                                             <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#basvuruModal">Başvur</button></div>

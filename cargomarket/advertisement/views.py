@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from advertisement.models import Advertisement, Application
 #from account.models import License
-from advertisement.forms import AdvertisementForm
+from advertisement.forms import AdvertisementForm, AdvertisementEditForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.utils.timezone import localdate
@@ -16,7 +16,7 @@ def ad_list(request):
     if search_post :
         advertisement = Advertisement.objects.filter(ad_title__contains=search_post, ad_state=1)
     else :
-        advertisement = Advertisement.objects.filter(ad_state=1).all()
+        advertisement = Advertisement.objects.filter(ad_state=1).order_by("-last_date").all()
 
     return render(request, template_name="adList.html", context={'user' : user, 'advertisement':advertisement})
 
@@ -50,14 +50,14 @@ def update_ad(request, ad_id):
     adp = Advertisement.objects.get(id=ad_id)
 
     if request.method == 'POST':
-        form = AdvertisementForm(request.POST, instance=adp)
+        form = AdvertisementEditForm(request.POST, instance=adp)
 
         if form.is_valid():
             form.save()
             messages.success(request,('İlan Güncelleme Tamamlandı!'))
             return redirect('detail_ad', ad_id=ad_id)
     else:
-        form = AdvertisementForm(instance=adp)
+        form = AdvertisementEditForm(instance=adp)
 
 
     return render(request, template_name='updateAd.html', context={'user':user, 'form':form, 'dltId':ad_id, 'last_date': str(adp.last_date) })
