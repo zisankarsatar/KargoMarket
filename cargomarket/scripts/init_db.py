@@ -304,13 +304,13 @@ def run():
     # CHAT APP Example Messaging
     
     # Create a user without profile to test chatapp
-    surucu_user = User()
-    surucu_user.username = "surucu"
-    surucu_user.set_password("zisan123")
-    surucu_user.email = "surucu@surucu.com"
-    surucu_user.first_name = "surucu"
-    surucu_user.last_name = "App"
-    surucu_user.save()
+    #surucu_user = User()
+    #surucu_user.username = "surucu"
+    #surucu_user.set_password("zisan123")
+    #surucu_user.email = "surucu@surucu.com"
+    #surucu_user.first_name = "surucu"
+    #surucu_user.last_name = "App"
+    #surucu_user.save()
 
     # # CHAT 1 
     # chat_surucu_company = Chat()
