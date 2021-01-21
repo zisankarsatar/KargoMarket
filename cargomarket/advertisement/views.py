@@ -60,7 +60,7 @@ def update_ad(request, ad_id):
         form = AdvertisementEditForm(instance=adp)
 
 
-    return render(request, template_name='updateAd.html', context={'user':user, 'form':form, 'dltId':ad_id, 'last_date': str(adp.last_date) })
+    return render(request, template_name='updateAd.html', context={'user':user, 'form':form, 'dltId':ad_id, 'last_date': str(adp.last_date) , 'adp':adp})
 
 @login_required
 def my_ad(request):
