@@ -1,6 +1,9 @@
 # Cargo Market Portal
 The cargo market portal allows companies to send their cargo to their customers quickly. For drivers, it allows them to find a delivery job quickly.
 
+### ✨ [Presentation](https://l24.im/ofWj0)
+[![Presentation](https://github.com/zisankarsatar/KargoMarket/assets/48350459/dd8e0694-8785-4e89-8e8b-ee79fc3325fe)](https://l24.im/ofWj0)
+
 # Installation
 ```
 python3.7 -m venv venv3
