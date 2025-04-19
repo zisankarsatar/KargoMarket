@@ -44,3 +44,6 @@ Open a docker console for chat application with redis
 ```
 docker run -p 6379:6379 redis:5
 ```
+
+
+Python,Django
